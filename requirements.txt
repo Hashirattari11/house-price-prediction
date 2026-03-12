@@ -1,5 +1,6 @@
-flask
+fastapi
 tensorflow
 numpy
 pandas
 scikit-learn
+pickle
