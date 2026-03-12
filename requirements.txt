@@ -1,6 +1,8 @@
 fastapi
-tensorflow
+uvicorn
 numpy
 pandas
 scikit-learn
+jinja2
+python-multipart
 pickle
