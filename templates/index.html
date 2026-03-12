@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>House Price Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --card: #161616;
+      --border: #2a2a2a;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --text: #f0ece4;
+      --muted: #7a7570;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background-image: radial-gradient(ellipse at 20% 20%, #1a1408 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 80%, #0a0f1a 0%, transparent 60%);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .header .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .header p {
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      font-weight: 300;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+
+    .field {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      background: #1e1e1e;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+
+    input::placeholder { color: #3a3a3a; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 0.9rem;
+      background: linear-gradient(135deg, var(--gold), #a8863a);
+      color: #0d0d0d;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    button:hover { opacity: 0.9; transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+
+    .result {
+      margin-top: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: linear-gradient(135deg, #1a140a, #12100d);
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      text-align: center;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .result span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold-light);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <span class="icon">🏡</span>
+      <h1>House Price Predictor</h1>
+      <p>Enter property details to estimate market value</p>
+    </div>
+
+    <div class="card">
+      <form method="post">
+        <div class="grid-2">
+          <div class="field">
+            <label>Bedrooms</label>
+            <input type="number" name="bedrooms" placeholder="e.g. 3" step="1" min="0" required />
+          </div>
+          <div class="field">
+            <label>Bathrooms</label>
+            <input type="number" name="bathrooms" placeholder="e.g. 2" step="0.5" min="0" required />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>Floors</label>
+            <input type="number" name="floors" placeholder="e.g. 1" step="0.5" min="1" required />
+          </div>
+          <div class="field">
+            <label>Sqft Living</label>
+            <input type="number" name="sqft_living" placeholder="e.g. 1800" step="1" min="0" required />
+          </div>
+        </div>
+
+        <button type="submit">Predict Price →</button>
+      </form>
+
+      {% if prediction_text %}
+        <div class="divider"></div>
+        <div class="result">
+          <span>{{ prediction_text }}</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
